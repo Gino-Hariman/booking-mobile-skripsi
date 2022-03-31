@@ -24,6 +24,9 @@
       "@components/*": [
         "src/components/*"
       ],
+      "@Illus/*": [
+        "./assets/illustration/*"
+      ],
       "@Icons/*": [
         "./assets/icons/*"
       ],
