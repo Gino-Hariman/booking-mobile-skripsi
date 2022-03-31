@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import ScreenSpinner from 'components/feedbacks/loader/ScreenSpinner';
+import { useFonts } from 'expo-font';
+import { Box, INativebaseConfig, NativeBaseProvider } from 'native-base';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+import Routes from 'routes';
+import styles from 'styles';
 
 export default function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        retry: false,
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  });
+  const [loaded] = useFonts({
+    PoppinsRegular: require('./assets/fonts/Poppins-Regular.ttf'),
+    PoppinsMedium: require('./assets/fonts/Poppins-Medium.ttf'),
+    PoppinsSemiBold: require('./assets/fonts/Poppins-SemiBold.ttf'),
+    PoppinsBold: require('./assets/fonts/Poppins-Bold.ttf'),
+  });
+
+  const config: INativebaseConfig = {
+    // rest of the config keys like dependencies can go here
+    strictMode: 'warn',
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider theme={styles} config={config}>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>{loaded ? <Routes /> : <ScreenSpinner />}</SafeAreaProvider>
+      </QueryClientProvider>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
