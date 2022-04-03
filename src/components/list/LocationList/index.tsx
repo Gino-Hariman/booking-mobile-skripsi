@@ -1,9 +1,8 @@
-import LocationCard from 'components/cards/LocationCard';
-import MainContainer from 'components/containers/MainContainer';
 import useMatchBreakPoint from 'hooks/devices/useMatchBreakpoint';
-import { Text } from 'native-base';
+import { FlatList, Text, View } from 'native-base';
 import { useCallback } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ListItem } from '../components';
 import MemoizeListItem from './MemoizeListItem';
 
 type tCardWidth = {
@@ -24,27 +23,37 @@ const cardWidth: tCardWidth = {
 
 const styles = StyleSheet.create({
   contentContainer: { flex: 1 },
-  flatList: { paddingHorizontal: 8 },
+  flatList: { paddingVertical: 16 },
 });
 
 const LocationList = ({ data }): JSX.Element => {
   const { match } = useMatchBreakPoint({ sizes: ['md', 'lg', 'xl'] });
 
   const renderLocationCard = useCallback(
-    ({ item, index }): JSX.Element => <MemoizeListItem item={item} width={cardWidth[match]} />,
+    ({ item, index }): JSX.Element => (
+      <View mb={6}>
+        <MemoizeListItem item={item} width={cardWidth[match]} />
+      </View>
+    ),
     [match],
   );
 
   return (
     <FlatList
-      key={match}
+      keyExtractor={(item) => item.id}
       // style={styles.flatList}
       data={data}
       renderItem={renderLocationCard}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => (
-        <Text fontSize="lg-1" fontWeight="semibold" lineHeight={30}>
-          {`Hi, Explore and find
+        <Text
+          flexWrap="wrap"
+          noOfLines={2}
+          fontSize="lg-1"
+          fontWeight="semibold"
+          lineHeight={30}
+          mb={6}>
+          {`Hi, Explore and find 
 your best spot to learn`}
         </Text>
       )}

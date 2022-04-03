@@ -1,9 +1,13 @@
 import { extendTheme } from 'native-base';
+import { badge } from './components';
 import main from './main';
 import radius from './radius';
 import typography from './typography';
 
 const styles = extendTheme({
+  components: {
+    Badge: badge,
+  },
   fontConfig: {
     Poppins: {
       400: {

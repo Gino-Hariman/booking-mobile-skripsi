@@ -9,6 +9,7 @@ import ProfileOutlined from '@Icons/Outline/Profile.svg';
 import HomeFill from '@Icons/Fill/Home.svg';
 import HomeOutlined from '@Icons/Outline/Home.svg';
 import HomeStack from 'routes/stack/HomeStack';
+import SeatStack from 'routes/stack/SeatStack';
 
 const Tabs = createBottomTabNavigator();
 
@@ -47,7 +48,7 @@ const BottomTabs = (): JSX.Element => {
         },
       })}>
       <Tabs.Screen name="My Home" component={HomeStack} />
-      <Tabs.Screen name="My Seat" component={HomeStack} />
+      <Tabs.Screen name="My Seat" component={SeatStack} />
       <Tabs.Screen name="My History" component={HomeStack} />
       <Tabs.Screen name="Profile" component={HomeStack} />
     </Tabs.Navigator>

@@ -6,7 +6,7 @@ type Props = {
 };
 
 const MemoizeListItem = ({ item, width }: Props) => (
-  <View py={2} width={width}>
+  <View>
     <LocationCard url={item.url} title={item.title} caption={item.caption} />
   </View>
 );
