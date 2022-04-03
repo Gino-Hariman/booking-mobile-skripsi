@@ -1,4 +1,5 @@
 const main = {
+  background: '#00952A',
   shade: {
     BG: '#F9F9F9',
     FG: '#FFFFFF',

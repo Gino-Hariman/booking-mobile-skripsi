@@ -10,6 +10,7 @@ import HomeFill from '@Icons/Fill/Home.svg';
 import HomeOutlined from '@Icons/Outline/Home.svg';
 import HomeStack from 'routes/stack/HomeStack';
 import SeatStack from 'routes/stack/SeatStack';
+import ProfileStack from 'routes/stack/ProfileStack';
 
 const Tabs = createBottomTabNavigator();
 
@@ -50,7 +51,7 @@ const BottomTabs = (): JSX.Element => {
       <Tabs.Screen name="My Home" component={HomeStack} />
       <Tabs.Screen name="My Seat" component={SeatStack} />
       <Tabs.Screen name="My History" component={HomeStack} />
-      <Tabs.Screen name="Profile" component={HomeStack} />
+      <Tabs.Screen name="Profile" component={ProfileStack} />
     </Tabs.Navigator>
   );
 };

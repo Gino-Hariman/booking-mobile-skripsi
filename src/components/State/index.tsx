@@ -23,16 +23,7 @@ const State = ({ title, btnText, Illus }: Props) => {
           {title}
         </Text>
         <Container alignSelf="center">
-          <Button
-            width={140}
-            size="sm"
-            rounded="full"
-            _text={{
-              fontSize: 'md-2',
-              fontWeight: 'semibold',
-            }}>
-            {btnText}
-          </Button>
+          <Button>{btnText}</Button>
         </Container>
       </VStack>
     </View>
