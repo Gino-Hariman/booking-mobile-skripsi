@@ -6,7 +6,6 @@ type FormsType = {
   name: string;
   placeholder: string;
   type: string;
-  keyboardType?: KeyboardTypeOptions;
 };
 
 type Props = {
@@ -14,15 +13,23 @@ type Props = {
   register: any;
   control: any;
   errors: { [key: string]: string };
+  keyboardType?: KeyboardTypeOptions;
 };
 
-const DataForm = ({ forms = [], register, control, errors }: Props): JSX.Element => {
+const DataForm = ({ forms = [], register, control, errors, keyboardType }: Props): JSX.Element => {
   return (
     <>
       {forms.map((form) => {
         const Comp = Form[form.type];
         return (
-          <Comp key={form.name} register={register} errors={errors} control={control} {...form} />
+          <Comp
+            key={form.name}
+            register={register}
+            errors={errors}
+            control={control}
+            {...form}
+            keyboardType={keyboardType}
+          />
         );
       })}
     </>

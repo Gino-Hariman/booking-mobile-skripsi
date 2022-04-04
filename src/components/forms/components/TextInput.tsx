@@ -34,13 +34,12 @@ const TextInput = ({
   const isError = errors && errors[name];
   return (
     <View>
-      <Text color="gray.600" mb={2}>
+      <Text color="gray.600" fontWeight="medium" fontSize="md-1" lineHeight={15} mb={2}>
         {label}
       </Text>
 
       <Input
-        // color={color}
-        // error={isError}
+        variant={isError ? 'error' : 'inActive'}
         type={inputType}
         keyboardType={keyboardType || 'default'}
         value={field.value}
@@ -48,7 +47,11 @@ const TextInput = ({
         onChangeText={field.onChange}
         placeholder={placeholder}
       />
-      {isError && <Text>{errors[name].message}</Text>}
+      {isError && (
+        <Text mt={1} color="danger.500" fontSize="md-1" fontWeight="medium">
+          {errors[name].message}
+        </Text>
+      )}
     </View>
   );
 };

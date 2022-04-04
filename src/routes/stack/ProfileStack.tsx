@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainHeader from 'components/navigation/headers/MainHeader';
+import Login from 'screens/Authentication/Login';
+import VerifyAccount from 'screens/Authentication/VerifyAccount';
 import Profile from 'screens/Profile';
 import { ProfileParamList } from 'types/ProfileParamList';
 
@@ -14,6 +16,8 @@ const ProfileStack = (): JSX.Element => {
         headerLeft: () => <MainHeader />,
       }}>
       <Stack.Screen name="ProfileScreen" component={Profile} />
+      <Stack.Screen name="LoginScreen" component={Login} />
+      <Stack.Screen name="VerifyAccScreen" component={VerifyAccount} />
     </Stack.Navigator>
   );
 };

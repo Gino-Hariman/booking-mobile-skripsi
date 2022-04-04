@@ -1,35 +1,50 @@
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Container, FormControl, Heading, ScrollView, View } from 'native-base';
+import {
+  Button,
+  Container,
+  FormControl,
+  Heading,
+  ScrollView,
+  Stack,
+  Text,
+  View,
+} from 'native-base';
 import DataForm from './DataForm';
 import MainContainer from 'components/containers/MainContainer';
 import useKeyboardInfo from 'hooks/devices/useKeyboardInfo';
 
-const LoginForm = ({ control, errors, register, isSubmitting, onSubmit, setValue }) => {
+const VerifyAccountForm = ({ control, errors, register, isSubmitting, onSubmit, setValue }) => {
   return (
     <MainContainer px={4}>
       <FormControl mb={5}>
-        <Heading color="primary.500" fontSize="lg-4" fontWeight="bold" my={8}>
-          Login
-        </Heading>
+        <Stack space={1} my={8}>
+          <Heading color="primary.500" fontSize="lg-4" fontWeight="bold">
+            Verify Account
+          </Heading>
+          <Text color="gray.700" fontSize="md-2" fontWeight="medium">
+            Enter the verification code that send to ff80005@student.uph.edu
+          </Text>
+        </Stack>
         <DataForm
           forms={[
             {
-              label: 'Student Email',
-              name: 'email',
-              placeholder: 'youremail@email.com',
+              label: 'Verification Code',
+              name: 'verify_code',
+              placeholder: 'xxxx',
               type: 'TextInput',
             },
           ]}
           register={register}
           errors={errors}
           control={control}
+          keyboardType="number-pad"
         />
       </FormControl>
       <Container mt={20} alignSelf="center">
         <Button isLoading={isSubmitting} onPress={onSubmit}>
-          Login
+          Continue
         </Button>
       </Container>
 
@@ -38,4 +53,4 @@ const LoginForm = ({ control, errors, register, isSubmitting, onSubmit, setValue
   );
 };
 
-export default LoginForm;
+export default VerifyAccountForm;
