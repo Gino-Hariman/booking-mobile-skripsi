@@ -1,11 +1,12 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import ProfileDetail from 'components/detail-form/ProfileDetail';
 import { useAuth } from 'context/AuthContext';
 import { Text } from 'native-base';
 import { useEffect } from 'react';
 import Login from 'screens/Authentication/Login';
 
 const Profile = () => {
-  const { isLoginned } = useAuth();
+  const { isLoginned, logout } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Profile = () => {
       );
   }, []);
 
-  return <Text>Profile</Text>;
+  return <ProfileDetail handleLogout={logout} />;
 };
 
 export default Profile;

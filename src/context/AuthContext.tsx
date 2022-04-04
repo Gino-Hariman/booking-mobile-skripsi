@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
     await clearAuthToken();
     return navigation.reset({
       index: 0,
-      routes: [{ name: 'landing/Home' }],
+      routes: [{ name: 'My Home/HomeScreen' }],
       actions: [navigation.navigate('My Home')],
     });
   }, [clearAuthToken, navigation]);
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       saveAuthToken,
       clearAuthToken,
       logout,
-      isLoginned: Boolean(authToken),
+      // isLoginned: Boolean(authToken),
     }),
     [authToken, saveAuthToken, clearAuthToken, logout],
   );

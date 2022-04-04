@@ -1,16 +1,4 @@
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  Button,
-  Container,
-  FormControl,
-  Heading,
-  ScrollView,
-  Stack,
-  Text,
-  View,
-} from 'native-base';
+import { Button, Container, FormControl, Heading, Stack, Text } from 'native-base';
 import DataForm from './DataForm';
 import MainContainer from 'components/containers/MainContainer';
 import useKeyboardInfo from 'hooks/devices/useKeyboardInfo';

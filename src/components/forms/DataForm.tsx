@@ -6,6 +6,8 @@ type FormsType = {
   name: string;
   placeholder: string;
   type: string;
+  variant?: string;
+  isDisabled?: boolean;
 };
 
 type Props = {

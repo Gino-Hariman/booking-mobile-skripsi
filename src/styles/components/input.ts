@@ -1,8 +1,7 @@
 const input = {
   baseStyle: { py: 3, px: 5 },
   defaultProps: {
-    rounded: 'full',
-    borderWidth: 1,
+    bgColor: 'transparent',
     placeholderTextColor: 'shade.BD',
     fontSize: 'md-2',
     fontWeight: 'medium',
@@ -25,11 +24,15 @@ const input = {
   variants: {
     inActive: () => {
       return {
+        borderWidth: 1,
+        rounded: 'full',
         borderColor: 'gray.500',
       };
     },
     error: ({ colorScheme }: { colorScheme: string }) => {
       return {
+        borderWidth: 1,
+        rounded: 'full',
         borderColor: 'danger.500',
       };
     },

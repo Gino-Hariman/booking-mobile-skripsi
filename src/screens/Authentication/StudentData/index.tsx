@@ -1,18 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigation } from '@react-navigation/native';
-
-import VerifyAccountForm from 'components/forms/VerifyAccountForm';
+import ProfileForm from 'components/forms/ProfileForm';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const validationSchema = yup
   .object({
-    verify_code: yup.number().min(6).required('OTP Required'),
+    student_id: yup.string().required('Student ID Required'),
+    student_name: yup.string().required('Student Name Required'),
+    class: yup.string().required('Class Required'),
+    major: yup.string().required('Major Reuired'),
   })
   .required();
 
-const VerifyAccount = () => {
-  const navigation = useNavigation();
+const StudentData = () => {
   const {
     setValue,
     register,
@@ -22,18 +22,19 @@ const VerifyAccount = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      verify_code: 0,
+      student_id: '',
+      student_name: '',
+      class: '',
+      major: '',
     },
   });
 
   const onSubmit = (data) => {
-    console.log('asdf');
     console.log('data form', data);
-    navigation.navigate('StudentDataScreen');
   };
 
   return (
-    <VerifyAccountForm
+    <ProfileForm
       control={control}
       errors={errors}
       register={register}
@@ -43,4 +44,4 @@ const VerifyAccount = () => {
   );
 };
 
-export default VerifyAccount;
+export default StudentData;

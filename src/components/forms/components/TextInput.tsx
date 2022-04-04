@@ -11,6 +11,8 @@ type TextInputProps = {
   color: string;
   control: any;
   errors: string;
+  isDisabled: boolean;
+  variant: string;
 };
 
 type FormValues = {
@@ -25,6 +27,8 @@ const TextInput = ({
   control,
   keyboardType,
   errors,
+  isDisabled = false,
+  variant = 'inActive',
 }: TextInputProps) => {
   const { field } = useController<FormValues>({
     control,
@@ -33,13 +37,14 @@ const TextInput = ({
   });
   const isError = errors && errors[name];
   return (
-    <View>
+    <View mb={8}>
       <Text color="gray.600" fontWeight="medium" fontSize="md-1" lineHeight={15} mb={2}>
         {label}
       </Text>
 
       <Input
-        variant={isError ? 'error' : 'inActive'}
+        isDisabled={isDisabled}
+        variant={isError ? 'error' : variant}
         type={inputType}
         keyboardType={keyboardType || 'default'}
         value={field.value}
