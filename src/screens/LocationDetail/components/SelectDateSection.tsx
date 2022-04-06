@@ -7,6 +7,7 @@ import { dateMonthFormat, dayOfWeeksFormat } from 'utils/dateTimeFormat';
 import { getDateByIndex } from 'utils/selectDate';
 
 const SelectDateSection = () => {
+  const [date, setDate] = useState(new Date());
   const [active, setActive] = useState('');
 
   const onSelectDate = (data: string) => {
@@ -33,7 +34,7 @@ const SelectDateSection = () => {
       </HStack>
 
       <Stack flex={1.2} bg="coolGray.400">
-        <DateIconButton />
+        <DateIconButton setDate={setDate} />
       </Stack>
     </HStack>
   );

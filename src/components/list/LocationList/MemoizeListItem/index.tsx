@@ -3,11 +3,12 @@ import { View } from 'native-base';
 
 type Props = {
   width: string;
+  handlePress: () => void;
 };
 
-const MemoizeListItem = ({ item, width }: Props) => (
+const MemoizeListItem = ({ item, width, handlePress }: Props) => (
   <View width={width}>
-    <LocationCard url={item.url} title={item.title} caption={item.caption} />
+    <LocationCard url={item.url} title={item.title} caption={item.caption} onPress={handlePress} />
   </View>
 );
 

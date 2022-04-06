@@ -1,7 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import useMatchBreakPoint from 'hooks/devices/useMatchBreakpoint';
 import { FlatList, Text, View } from 'native-base';
 import { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { ListItem } from '../components';
 import MemoizeListItem from './MemoizeListItem';
 
@@ -28,11 +29,16 @@ const styles = StyleSheet.create({
 
 const LocationList = ({ data }): JSX.Element => {
   const { match } = useMatchBreakPoint({ sizes: ['md', 'lg', 'xl'] });
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('LocationDetailScreen');
+  };
 
   const renderLocationCard = useCallback(
     ({ item, index }): JSX.Element => (
       <View mb={6}>
-        <MemoizeListItem item={item} width={cardWidth[match]} />
+        <MemoizeListItem item={item} width={cardWidth[match]} handlePress={handlePress} />
       </View>
     ),
     [match],

@@ -1,4 +1,5 @@
 import LocationFooter from 'components/navigation/footers/DetailFooter';
+import { useAuth } from 'context/AuthContext';
 import { Box, Divider, Text, View } from 'native-base';
 import { ScrollView } from 'react-native';
 import times from '_mocks_/times';
@@ -7,6 +8,8 @@ import ImageDetail from './components/ImageDetail';
 import SelectDateSection from './components/SelectDateSection';
 
 const LocationDetail = () => {
+  const { isLoginned } = useAuth();
+
   return (
     <View flex={1}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -17,7 +20,7 @@ const LocationDetail = () => {
           <ChooseTime data={times} />
         </Box>
       </ScrollView>
-      <LocationFooter />
+      {isLoginned && <LocationFooter />}
     </View>
   );
 };
