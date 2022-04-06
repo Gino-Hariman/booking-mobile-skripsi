@@ -23,7 +23,15 @@ const DetailField = ({
         {label}
       </Text>
 
-      <Input px={0} isDisabled={isDisabled} variant={variant} value={placeholder} />
+      <Input
+        color="primary.800"
+        fontSize="md-2"
+        fontWeight="medium"
+        px={0}
+        isDisabled={isDisabled}
+        variant={variant}
+        value={placeholder}
+      />
     </View>
   );
 };

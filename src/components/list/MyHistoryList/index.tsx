@@ -1,9 +1,8 @@
 import SeatCard from 'components/cards/SeatCard';
-import { Divider, FlatList, Text } from 'native-base';
-
+import { Divider, FlatList } from 'native-base';
 import { ListItem } from '../components';
 
-const MySeatList = ({ data }) => {
+const MyHistoryList = ({ data }) => {
   const renderSeatCard = ({ item }) => (
     <ListItem>
       <SeatCard />
@@ -21,4 +20,4 @@ const MySeatList = ({ data }) => {
   );
 };
 
-export default MySeatList;
+export default MyHistoryList;

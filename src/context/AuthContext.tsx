@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       saveAuthToken,
       clearAuthToken,
       logout,
-      // isLoginned: Boolean(authToken),
+      isLoginned: Boolean(authToken),
     }),
     [authToken, saveAuthToken, clearAuthToken, logout],
   );
