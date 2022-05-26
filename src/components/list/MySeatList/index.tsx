@@ -1,12 +1,12 @@
-import SeatCard from 'components/cards/SeatCard';
-import { Divider, FlatList, Text } from 'native-base';
+import SeatCard from "components/cards/SeatCard";
+import { Divider, FlatList, Text } from "native-base";
 
-import { ListItem } from '../components';
+import { ListItem } from "../components";
 
 const MySeatList = ({ data }) => {
   const renderSeatCard = ({ item }) => (
     <ListItem>
-      <SeatCard />
+      <SeatCard status={item.order_status} detail={item} />
     </ListItem>
   );
   return (

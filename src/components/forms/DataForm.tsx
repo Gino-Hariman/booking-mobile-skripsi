@@ -1,5 +1,5 @@
-import { KeyboardTypeOptions } from 'react-native';
-import * as Form from './components';
+import { KeyboardTypeOptions } from "react-native";
+import * as Form from "./components";
 
 type FormsType = {
   label: string;
@@ -18,7 +18,13 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
 };
 
-const DataForm = ({ forms = [], register, control, errors, keyboardType }: Props): JSX.Element => {
+const DataForm = ({
+  forms = [],
+  register,
+  control,
+  errors,
+  keyboardType,
+}: Props): JSX.Element => {
   return (
     <>
       {forms.map((form) => {

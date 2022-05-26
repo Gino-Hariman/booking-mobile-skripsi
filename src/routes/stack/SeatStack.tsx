@@ -1,18 +1,19 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MainHeader from 'components/navigation/headers/MainHeader';
-import MySeat from 'screens/MySeat';
-import { SeatParamList } from 'types/SeatParamList';
+import { createStackNavigator } from "@react-navigation/stack";
+import MainHeader from "components/navigation/headers/MainHeader";
+import MySeat from "screens/MySeat";
+import { SeatParamList } from "types/SeatParamList";
 
-const Stack = createNativeStackNavigator<SeatParamList>();
+const Stack = createStackNavigator<SeatParamList>();
 
 const SeatStack = (): JSX.Element => {
   return (
     <Stack.Navigator
       screenOptions={{
         // headerLeft: () => null,
-        headerTitle: '',
+        headerTitle: "",
         headerLeft: () => <MainHeader />,
-      }}>
+      }}
+    >
       <Stack.Screen name="MySeatScreen" component={MySeat} />
     </Stack.Navigator>
   );

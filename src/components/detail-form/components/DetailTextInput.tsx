@@ -1,4 +1,4 @@
-import { Box, FormControl, Input, WarningOutlineIcon } from "native-base";
+import { Box, FormControl, Input, View, WarningOutlineIcon } from "native-base";
 import { useController } from "react-hook-form";
 import { KeyboardTypeOptions } from "react-native";
 
@@ -19,7 +19,7 @@ type FormValues = {
   [key: string]: string;
 };
 
-const TextInput = ({
+const DetailTextInput = ({
   label,
   placeholder,
   name,
@@ -37,14 +37,26 @@ const TextInput = ({
 
   const isError = errors && errors[name];
   return (
-    <Box alignItems="center">
+    <Box mb={8}>
       <FormControl isInvalid={isError}>
-        <FormControl.Label>{label}</FormControl.Label>
+        <FormControl.Label
+          _text={{
+            color: "gray.600",
+            fontWeight: "medium",
+            fontSize: "md-1",
+          }}
+        >
+          {label}
+        </FormControl.Label>
         <Input
+          color="primary.800"
+          fontSize="md-2"
+          px={0}
+          fontWeight="medium"
           autoCorrect={false}
           autoCapitalize="none"
           isDisabled={isDisabled}
-          variant={isError ? "error" : variant}
+          variant="underlined"
           keyboardType={keyboardType || "default"}
           value={field.value}
           onBlur={field.onBlur}
@@ -60,4 +72,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default DetailTextInput;

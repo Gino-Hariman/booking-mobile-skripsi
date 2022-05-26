@@ -1,9 +1,23 @@
-import { Button, Container, FormControl, Heading, Stack, Text } from 'native-base';
-import DataForm from './DataForm';
-import MainContainer from 'components/containers/MainContainer';
-import useKeyboardInfo from 'hooks/devices/useKeyboardInfo';
+import {
+  Button,
+  Container,
+  FormControl,
+  Heading,
+  Stack,
+  Text,
+} from "native-base";
+import DataForm from "./DataForm";
+import MainContainer from "components/containers/MainContainer";
+import useKeyboardInfo from "hooks/devices/useKeyboardInfo";
 
-const VerifyAccountForm = ({ control, errors, register, isSubmitting, onSubmit, setValue }) => {
+const VerifyAccountForm = ({
+  control,
+  errors,
+  register,
+  isSubmitting,
+  onSubmit,
+  setValue,
+}) => {
   return (
     <MainContainer px={4}>
       <FormControl mb={5}>
@@ -18,10 +32,10 @@ const VerifyAccountForm = ({ control, errors, register, isSubmitting, onSubmit, 
         <DataForm
           forms={[
             {
-              label: 'Verification Code',
-              name: 'verify_code',
-              placeholder: 'xxxx',
-              type: 'TextInput',
+              label: "Verification Code",
+              name: "verify_code",
+              placeholder: "xxxx",
+              type: "TextInput",
             },
           ]}
           register={register}

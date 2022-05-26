@@ -1,18 +1,19 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigation } from '@react-navigation/native';
-import MainContainer from 'components/containers/MainContainer';
-import LoginForm from 'components/forms/LoginForm';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+import MainContainer from "components/containers/MainContainer";
+import LoginForm from "components/forms/LoginForm";
+import { useAuth } from "context/AuthContext";
+import toast from "helpers/toast";
+import usePostQuery from "hooks/usePostQuery";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 const validationSchema = yup
   .object({
-    email: yup.string().email('Invalid Email').required('Email Required'),
+    email: yup.string().email("Invalid Email").required("Email Required"),
   })
   .required();
 
 const Login = () => {
-  const navigation = useNavigation();
   const {
     setValue,
     register,
@@ -22,13 +23,28 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      email: '',
+      email: "",
     },
   });
 
-  const onSubmit = (data) => {
-    console.log('data form', data);
-    navigation.navigate('VerifyAccScreen');
+  const { login } = useAuth();
+
+  const loginMutation = usePostQuery("/login");
+
+  const onSubmit = (data: { email: string }) => {
+    loginMutation.mutate(data, {
+      onSuccess: (res) => {
+        if (res.type === "success") {
+          toast({
+            type: "success",
+            title: "Login",
+            subTitle: "Successfully Login",
+          });
+          login(res.token);
+        }
+      },
+      onError: (err) => console.log("err", err),
+    });
   };
 
   return (

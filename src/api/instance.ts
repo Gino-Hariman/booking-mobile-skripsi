@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_MAIN_HOST}/api/v1`,
+  baseURL: `${process.env.MAIN_HOST}`,
   withCredentials: true,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
-  responseType: 'json',
+  responseType: "json",
 });
 
 export default instance;

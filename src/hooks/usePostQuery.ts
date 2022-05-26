@@ -1,9 +1,9 @@
-import { useMutation } from 'react-query';
-import instance from '../api/instance';
+import { useMutation } from "react-query";
+import instance from "../api/instance";
 
-type ConfigTypes = { [key: string]: () => void };
+type ConfigTypes = { [key: string]: any };
 
-const usePostQuery = (path = '', config: ConfigTypes) => {
+const usePostQuery = (path: string = "", config?: ConfigTypes) => {
   return useMutation(
     async (formData) => {
       const { data } = await instance.post(path, formData);
@@ -11,7 +11,7 @@ const usePostQuery = (path = '', config: ConfigTypes) => {
     },
     {
       ...config,
-    },
+    }
   );
 };
 

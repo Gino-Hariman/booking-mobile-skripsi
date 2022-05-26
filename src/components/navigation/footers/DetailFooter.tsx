@@ -1,16 +1,18 @@
-import { Button, Text, View, VStack } from 'native-base';
+import { Button, Text, View, VStack } from "native-base";
 
 const LocationFooter = () => {
   return (
     <View
+      w="full"
       py="12px"
       px={4}
       bgColor="shade.FG"
       shadow={3}
       flexDirection="row"
       alignItems="center"
-      justifyContent="space-between">
-      <VStack space={1}>
+      justifyContent="space-between"
+    >
+      <VStack space={1} flex={1}>
         <Text fontSize="md-1" fontWeight="medium" lineHeight="15px">
           Booking Date
         </Text>
@@ -19,10 +21,16 @@ const LocationFooter = () => {
         </Text>
       </VStack>
       <Button
+        flex={1}
         rounded="full"
         px={6}
         py={3}
-        _text={{ color: 'primary.50', fontSize: 'md-2', fontWeight: 'semibold' }}>
+        _text={{
+          color: "primary.50",
+          fontSize: "md-2",
+          fontWeight: "semibold",
+        }}
+      >
         Continue Booking
       </Button>
     </View>

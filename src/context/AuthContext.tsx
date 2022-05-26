@@ -1,23 +1,61 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from "@react-navigation/native";
 
-export const AuthContext = React.createContext();
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import * as SecureStore from "expo-secure-store";
+import { ProfileNavigationProps } from "types/NavigationProps";
+import instance from "api/instance";
 
-const authTokenName = 'auth-tkn';
+interface AuthContextInterface {
+  login: (token: string) => void;
+  authToken: string | null;
+  saveAuthToken: (token: string) => Promise<void>;
+  clearAuthToken: () => Promise<void>;
+  logout: () => Promise<void>;
+  isLoginned: boolean;
+}
 
-const AuthProvider = ({ children }) => {
-  const navigation = useNavigation();
+export const AuthContext = React.createContext<AuthContextInterface | null>(
+  null
+);
+
+const authTokenName = "auth-tkn";
+
+interface Props {
+  children: JSX.Element;
+}
+
+const AuthProvider: React.FC<Props> = ({ children }) => {
+  const navigation = useNavigation<ProfileNavigationProps>();
 
   const [authToken, setAuthToken] = useState<string | null>(null);
 
-  const saveAuthToken = useCallback(async (token) => {
-    await SecureStore.setItemAsync(authTokenName, token);
-    setAuthToken(token);
+  const login = (token: string) => {
+    navigation.navigate("VerifyAccScreen", {
+      loginToken: token,
+    });
+  };
+
+  const saveAuthToken = useCallback(async (data) => {
+    await SecureStore.setItemAsync(authTokenName, data.loginToken);
+    await SecureStore.setItemAsync("email", data.email);
+    setAuthToken(data.loginToken);
+    instance.defaults.headers["Authorization"] = `Bearer ${data.loginToken}`;
+    return navigation.reset({
+      index: 0,
+      routes: [{ name: "Profile/ProfileScreen" }],
+      actions: [navigation.navigate("ProfileScreen")],
+    });
   }, []);
 
   const clearAuthToken = useCallback(async () => {
     await SecureStore.deleteItemAsync(authTokenName);
+    await SecureStore.deleteItemAsync("email");
     setAuthToken(null);
   }, []);
 
@@ -25,29 +63,34 @@ const AuthProvider = ({ children }) => {
     await clearAuthToken();
     return navigation.reset({
       index: 0,
-      routes: [{ name: 'My Home/HomeScreen' }],
-      actions: [navigation.navigate('My Home')],
+      routes: [{ name: "My Home/HomeScreen" }],
+      actions: [navigation.navigate("My Home")],
     });
   }, [clearAuthToken, navigation]);
 
   useEffect(() => {
     const loadAuthToken = async () => {
       const token = await SecureStore.getItemAsync(authTokenName);
-      setAuthToken(token);
+
+      if (token) {
+        instance.defaults.headers["Authorization"] = `Bearer ${token}`;
+        setAuthToken(token);
+      }
     };
 
     loadAuthToken();
   }, []);
 
-  const value = useMemo(
+  const value: AuthContextInterface = useMemo(
     () => ({
+      login,
       authToken,
       saveAuthToken,
       clearAuthToken,
       logout,
       isLoginned: Boolean(authToken),
     }),
-    [authToken, saveAuthToken, clearAuthToken, logout],
+    [login, authToken, saveAuthToken, clearAuthToken, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

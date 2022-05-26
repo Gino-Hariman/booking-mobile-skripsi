@@ -1,18 +1,19 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MainHeader from 'components/navigation/headers/MainHeader';
-import MyHistory from 'screens/MyHistory';
-import { HistoryParamList } from 'types/HistoryParamList';
+import MainHeader from "components/navigation/headers/MainHeader";
+import MyHistory from "screens/MyHistory";
+import { HistoryParamList } from "types/HistoryParamList";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Stack = createNativeStackNavigator<HistoryParamList>();
+const Stack = createStackNavigator<HistoryParamList>();
 
 const HistoryStack = (): JSX.Element => {
   return (
     <Stack.Navigator
       screenOptions={{
         // headerLeft: () => null,
-        headerTitle: '',
+        headerTitle: "",
         headerLeft: () => <MainHeader />,
-      }}>
+      }}
+    >
       <Stack.Screen name="HistoryScreen" component={MyHistory} />
     </Stack.Navigator>
   );

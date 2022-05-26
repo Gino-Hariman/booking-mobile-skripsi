@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { useQuery } from 'react-query';
-import instance from '../api/instance';
+import axios from "axios";
+import { useQuery } from "react-query";
+import instance from "../api/instance";
 
 type ConfigTypes = { [key: string]: () => void };
 
@@ -10,13 +10,17 @@ type ConfigTypes = { [key: string]: () => void };
 //     : axios.get(path).then((response) => response.data);
 // }
 
-const useGetQuery = (queryId = '1', path = '', config: ConfigTypes) => {
-  return useQuery(queryId,   async () => {
+const useGetQuery = (queryId = "1", path = "", config: ConfigTypes) => {
+  return useQuery(
+    queryId,
+    async () => {
       const { data } = await instance.get(path);
       return data;
-    },, {
-    ...config,
-  });
+    },
+    {
+      ...config,
+    }
+  );
 };
 
 export default useGetQuery;
