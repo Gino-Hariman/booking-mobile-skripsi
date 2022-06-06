@@ -4,18 +4,23 @@ import useGetQuery from "hooks/useGetQuery";
 import seats from "_mocks_/seats";
 import * as SecureStore from "expo-secure-store";
 import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
+import State from "components/State";
+import history from "@Illus/history.svg";
 
 const MyHistory = () => {
-  const { data, isFetching } = useGetQuery(
-    ["my-history"],
-    `/book/history?nim=03082180011`
-  );
+  const { data, isFetching } = useGetQuery(["my-history"], `/book/history`);
 
   if (isFetching) return <ScreenSpinner />;
-  console.log("data22", data);
+
   return (
     <MainContainer px={4}>
-      <MyHistoryList data={data} />
+      <State
+        title="History is still empty"
+        subTitle="Find your best spot to learn at UPH Medan Campus Lounge"
+        Illus={history}
+        btnText="Find Now"
+      />
+      {/* <MyHistoryList data={data} /> */}
     </MainContainer>
   );
 };

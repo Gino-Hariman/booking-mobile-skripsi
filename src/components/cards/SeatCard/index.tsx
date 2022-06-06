@@ -3,6 +3,7 @@ import TimeIcon from "@Icons/Outline/Time.svg";
 import CalendarIcon from "@Icons/Outline/Calendar.svg";
 import Status from "components/Status";
 import checkStatusStyle from "helpers/checkStatusStyle";
+import changeFieldText from "helpers/changeFieldText";
 
 const SeatCard = ({ status, detail }) => {
   return (
@@ -32,7 +33,10 @@ const SeatCard = ({ status, detail }) => {
         </HStack>
       </VStack>
       <View alignSelf="flex-end">
-        <Status title="Processing" colorScheme={checkStatusStyle(status)} />
+        <Status
+          title={changeFieldText(status)}
+          colorScheme={checkStatusStyle(status)}
+        />
       </View>
     </View>
   );

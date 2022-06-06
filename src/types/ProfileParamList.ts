@@ -3,4 +3,5 @@ export type ProfileParamList = {
   LoginScreen: undefined;
   VerifyAccScreen: undefined;
   StudentDataScreen: undefined;
+  StateScreen: undefined;
 };

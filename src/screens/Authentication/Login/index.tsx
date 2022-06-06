@@ -40,7 +40,7 @@ const Login = () => {
             title: "Login",
             subTitle: "Successfully Login",
           });
-          login(res.token);
+          login(res.token, data.email);
         }
       },
       onError: (err) => console.log("err", err),

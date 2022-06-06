@@ -1,4 +1,4 @@
-import { Badge } from 'native-base';
+import { Badge } from "native-base";
 
 type Props = {
   title: string;

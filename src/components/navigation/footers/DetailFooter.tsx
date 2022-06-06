@@ -1,6 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import { Button, Text, View, VStack } from "native-base";
 
 const LocationFooter = () => {
+  const navigation = useNavigation();
+  const handleClick = () => {
+    navigation.navigate("StateScreen");
+  };
+
   return (
     <View
       w="full"
@@ -21,6 +27,7 @@ const LocationFooter = () => {
         </Text>
       </VStack>
       <Button
+        onPress={handleClick}
         flex={1}
         rounded="full"
         px={6}

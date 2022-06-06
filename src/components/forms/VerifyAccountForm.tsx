@@ -9,6 +9,7 @@ import {
 import DataForm from "./DataForm";
 import MainContainer from "components/containers/MainContainer";
 import useKeyboardInfo from "hooks/devices/useKeyboardInfo";
+import { useRoute } from "@react-navigation/native";
 
 const VerifyAccountForm = ({
   control,
@@ -18,6 +19,7 @@ const VerifyAccountForm = ({
   onSubmit,
   setValue,
 }) => {
+  const { email } = useRoute().params;
   return (
     <MainContainer px={4}>
       <FormControl mb={5}>
@@ -26,7 +28,7 @@ const VerifyAccountForm = ({
             Verify Account
           </Heading>
           <Text color="gray.700" fontSize="md-2" fontWeight="medium">
-            Enter the verification code that send to ff80005@student.uph.edu
+            Enter the verification code that send to {email}
           </Text>
         </Stack>
         <DataForm

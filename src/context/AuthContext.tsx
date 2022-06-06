@@ -35,9 +35,10 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const [authToken, setAuthToken] = useState<string | null>(null);
 
-  const login = (token: string) => {
+  const login = (token: string, email: string) => {
     navigation.navigate("VerifyAccScreen", {
       loginToken: token,
+      email,
     });
   };
 

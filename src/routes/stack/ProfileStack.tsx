@@ -4,6 +4,7 @@ import Login from "screens/Authentication/Login";
 import StudentData from "screens/Authentication/StudentData";
 import VerifyAccount from "screens/Authentication/VerifyAccount";
 import Profile from "screens/Profile";
+import StateScreen from "screens/StateScreen";
 import { ProfileParamList } from "types/ProfileParamList";
 
 const Stack = createStackNavigator<ProfileParamList>();
@@ -21,6 +22,7 @@ const ProfileStack = (): JSX.Element => {
       <Stack.Screen name="LoginScreen" component={Login} />
       <Stack.Screen name="VerifyAccScreen" component={VerifyAccount} />
       <Stack.Screen name="StudentDataScreen" component={StudentData} />
+      <Stack.Screen name="StateScreen" component={StateScreen} />
     </Stack.Navigator>
   );
 };

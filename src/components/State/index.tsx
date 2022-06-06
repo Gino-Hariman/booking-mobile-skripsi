@@ -1,14 +1,15 @@
-import { Button, Container, Text, View, VStack } from 'native-base';
-import Empty from '@Illus/empty.svg';
-import React from 'react';
+import { Button, Container, Text, View, VStack } from "native-base";
+import Empty from "@Illus/empty.svg";
+import React from "react";
 
 type Props = {
   title: string;
   btnText: string;
+  subTitle: string;
   Illus: React.ReactType;
 };
 
-const State = ({ title, btnText, Illus }: Props) => {
+const State = ({ title, subTitle, btnText, Illus }: Props) => {
   return (
     <View flex={0.8} alignItems="center" justifyContent="center" px={16}>
       <VStack space={6}>
@@ -19,9 +20,22 @@ const State = ({ title, btnText, Illus }: Props) => {
           color="gray.800"
           fontSize="lg-1"
           fontWeight="semibold"
-          lineHeight="30px">
+          lineHeight="30px"
+        >
           {title}
         </Text>
+        {subTitle && (
+          <Text
+            textAlign="center"
+            color="gray.800"
+            fontSize="md-2"
+            fontWeight="normal"
+            lineHeight="21px"
+          >
+            {subTitle}
+          </Text>
+        )}
+
         <Container alignSelf="center">
           <Button>{btnText}</Button>
         </Container>
