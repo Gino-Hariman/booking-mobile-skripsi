@@ -1,12 +1,26 @@
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Container, FormControl, Heading, ScrollView, View } from 'native-base';
-import DataForm from './DataForm';
-import MainContainer from 'components/containers/MainContainer';
-import useKeyboardInfo from 'hooks/devices/useKeyboardInfo';
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Button,
+  Container,
+  FormControl,
+  Heading,
+  ScrollView,
+  View,
+} from "native-base";
+import DataForm from "./DataForm";
+import MainContainer from "components/containers/MainContainer";
+import useKeyboardInfo from "hooks/devices/useKeyboardInfo";
 
-const ProfileForm = ({ control, errors, register, isSubmitting, onSubmit, setValue }) => {
+const ProfileForm = ({
+  control,
+  errors,
+  register,
+  isSubmitting,
+  onSubmit,
+  setValue,
+}) => {
   return (
     <MainContainer px={4}>
       <FormControl mb={5}>
@@ -16,28 +30,28 @@ const ProfileForm = ({ control, errors, register, isSubmitting, onSubmit, setVal
         <DataForm
           forms={[
             {
-              label: 'Student ID',
-              name: 'student_id',
-              placeholder: 'ex.03082180005',
-              type: 'TextInput',
+              label: "Student ID",
+              name: "student_id",
+              placeholder: "ex.03082180005",
+              type: "TextInput",
             },
             {
-              label: 'Student Name',
-              name: 'student_name',
-              placeholder: 'Ex.farandi',
-              type: 'TextInput',
+              label: "Student Name",
+              name: "student_name",
+              placeholder: "Ex.farandi",
+              type: "TextInput",
             },
             {
-              label: 'Class',
-              name: 'class',
-              placeholder: 'ex.18TI2',
-              type: 'TextInput',
+              label: "Class",
+              name: "class",
+              placeholder: "ex.18TI2",
+              type: "TextInput",
             },
             {
-              label: 'Major',
-              name: 'major',
-              placeholder: 'Ex. Informatics',
-              type: 'TextInput',
+              label: "Major",
+              name: "major",
+              placeholder: "Ex. Informatics",
+              type: "TextInput",
             },
           ]}
           register={register}

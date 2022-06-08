@@ -12,8 +12,10 @@ import usePostQuery from "hooks/usePostQuery";
 import toast from "helpers/toast";
 import { useNavigation } from "@react-navigation/native";
 import { ProfileNavigationProps } from "types/NavigationProps";
+import { useAuth } from "context/AuthContext";
 
-const RegisterProfile = ({}) => {
+const RegisterProfile = () => {
+  const { saveAuthToken, logout } = useAuth();
   const navigation = useNavigation<ProfileNavigationProps>();
   const {
     setValue,
@@ -39,7 +41,6 @@ const RegisterProfile = ({}) => {
     },
     mode: "onBlur",
   });
-
   const mutation = usePostQuery("/students");
 
   const onSubmit = (data) => {
@@ -54,7 +55,8 @@ const RegisterProfile = ({}) => {
               title: "Register Profile",
               subTitle: "Register Success!",
             });
-            return navigation.push("ProfileScreen");
+            saveAuthToken(res);
+            // return navigation.push("ProfileScreen");
           }
         },
         onError: (err) => {

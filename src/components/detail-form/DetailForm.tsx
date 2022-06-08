@@ -28,12 +28,12 @@ const DetailForm = ({
 }: Props): JSX.Element => {
   return (
     <>
-      {forms.map((form) => {
+      {forms.map((form, idx) => {
         const Comp = Form[form.type];
         return (
           <Comp
-            key={form.name}
             {...form}
+            key={form.name}
             register={register}
             errors={errors}
             control={control}

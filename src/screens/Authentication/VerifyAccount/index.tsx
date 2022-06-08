@@ -34,8 +34,6 @@ const VerifyAccount = ({ route }) => {
   const verifyMutation = usePostQuery("/login/verify");
 
   const onSubmit = (data) => {
-    console.log("asdf");
-    console.log("data form", data, loginToken);
     verifyMutation.mutate(
       { otp: data.verify_code, token: loginToken },
       {

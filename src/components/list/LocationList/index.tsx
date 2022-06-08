@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import useMatchBreakPoint from "hooks/devices/useMatchBreakpoint";
-import { FlatList, Text, View } from "native-base";
+import { Box, FlatList, Flex, Text, View } from "native-base";
 import { useCallback } from "react";
 import {
   Pressable,
@@ -63,24 +63,34 @@ const LocationList = ({ data }): JSX.Element => {
 
   return (
     <FlatList
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id_location}
       // style={styles.flatList}
       data={data}
       renderItem={renderLocationCard}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => (
-        <Text
-          flexWrap="wrap"
-          noOfLines={2}
-          fontSize="lg-1"
-          fontWeight="semibold"
-          lineHeight={30}
-          pt={4}
-          mb={6}
-        >
-          {`Hi, Explore and find 
-your best spot to learn`}
-        </Text>
+        <Flex>
+          <Text
+            flexWrap="wrap"
+            noOfLines={2}
+            fontSize="lg-1"
+            fontWeight="semibold"
+            lineHeight={30}
+            pt={4}
+          >
+            Hi, Explore and find
+          </Text>
+          <Text
+            flexWrap="wrap"
+            noOfLines={2}
+            fontSize="lg-1"
+            fontWeight="semibold"
+            lineHeight={30}
+            mb={6}
+          >
+            your best spot to learn
+          </Text>
+        </Flex>
       )}
     />
   );

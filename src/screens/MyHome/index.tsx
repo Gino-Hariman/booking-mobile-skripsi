@@ -14,10 +14,6 @@ import useGetQuery from "hooks/useGetQuery";
 import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
 
 const MyHome = () => {
-  const { authToken } = useAuth();
-
-  console.log("authToken", authToken);
-
   const { data, isFetching } = useGetQuery(["all-location"], "/location");
 
   if (isFetching) return <ScreenSpinner />;

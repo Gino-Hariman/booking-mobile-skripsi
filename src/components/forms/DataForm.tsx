@@ -31,7 +31,7 @@ const DataForm = ({
         const Comp = Form[form.type];
         return (
           <Comp
-            key={form.name}
+            key={form?.name}
             register={register}
             errors={errors}
             control={control}

@@ -56,7 +56,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const clearAuthToken = useCallback(async () => {
     await SecureStore.deleteItemAsync(authTokenName);
-    await SecureStore.deleteItemAsync("email");
+    instance.defaults.headers["Authorization"] = "";
     setAuthToken(null);
   }, []);
 
