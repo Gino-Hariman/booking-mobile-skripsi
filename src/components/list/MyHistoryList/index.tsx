@@ -15,7 +15,7 @@ const MyHistoryList = ({ data }) => {
   return (
     <FlatList
       overScrollMode="never"
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.order_id}
       data={data}
       renderItem={renderSeatCard}
       ItemSeparatorComponent={() => <Divider bg="shade.BD" />}

@@ -53,7 +53,7 @@ const TextInput = ({
         />
 
         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-          Try different from previous passwords.
+          Invalid Email
         </FormControl.ErrorMessage>
       </FormControl>
     </Box>

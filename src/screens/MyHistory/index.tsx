@@ -1,26 +1,35 @@
 import MainContainer from "components/containers/MainContainer";
 import MyHistoryList from "components/list/MyHistoryList";
 import useGetQuery from "hooks/useGetQuery";
-import seats from "_mocks_/seats";
-import * as SecureStore from "expo-secure-store";
 import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
-import State from "components/State";
-import history from "@Illus/history.svg";
+import Illus from "@Illus/history.svg";
+import StateScreen from "screens/StateScreen";
+import { useNavigation } from "@react-navigation/native";
 
 const MyHistory = () => {
+  const navigation = useNavigation();
   const { data, isFetching } = useGetQuery(["my-history"], `/book/history`);
+
+  const handlePress = () => {
+    navigation.navigate("HomeScreen");
+  };
 
   if (isFetching) return <ScreenSpinner />;
 
+  if (!Boolean(data.length))
+    return (
+      <StateScreen
+        title="Seat is still empty"
+        subTitle="Find your best spot to learn at Lounge UPH Medan Campus"
+        btnText="Find Now"
+        Illus={Illus}
+        handlePress={handlePress}
+      />
+    );
+
   return (
     <MainContainer px={4}>
-      <State
-        title="History is still empty"
-        subTitle="Find your best spot to learn at UPH Medan Campus Lounge"
-        Illus={history}
-        btnText="Find Now"
-      />
-      {/* <MyHistoryList data={data} /> */}
+      <MyHistoryList data={data} />
     </MainContainer>
   );
 };

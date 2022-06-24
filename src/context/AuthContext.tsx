@@ -49,8 +49,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     instance.defaults.headers["Authorization"] = `Bearer ${data.loginToken}`;
     return navigation.reset({
       index: 0,
-      routes: [{ name: "Profile/ProfileScreen" }],
-      actions: [navigation.navigate("ProfileScreen")],
+      routes: [{ name: "Profile" }],
+      // actions: [navigation.navigate("ProfileScreen")],
     });
   }, []);
 
@@ -64,8 +64,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     await clearAuthToken();
     return navigation.reset({
       index: 0,
-      routes: [{ name: "My Home/HomeScreen" }],
-      actions: [navigation.navigate("My Home")],
+      routes: [{ name: "My Home" }],
+      // actions: [navigation.navigate("My Home")],
     });
   }, [clearAuthToken, navigation]);
 

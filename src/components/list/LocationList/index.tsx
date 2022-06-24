@@ -32,12 +32,40 @@ const styles = StyleSheet.create({
   flatList: { paddingVertical: 16 },
 });
 
+const HeaderComponent = () => (
+  <Flex>
+    <Text
+      flexWrap="wrap"
+      noOfLines={2}
+      fontSize="lg-1"
+      fontWeight="semibold"
+      lineHeight={30}
+      pt={4}
+    >
+      Hi, Explore and find
+    </Text>
+    <Text
+      flexWrap="wrap"
+      noOfLines={2}
+      fontSize="lg-1"
+      fontWeight="semibold"
+      lineHeight={30}
+      mb={6}
+    >
+      your best spot to learn
+    </Text>
+  </Flex>
+);
+
+const getKey = (item) => `s-${item.id_location}`;
+
 const LocationList = ({ data }): JSX.Element => {
   const { match } = useMatchBreakPoint({ sizes: ["md", "lg", "xl"] });
   const navigation = useNavigation();
 
-  const handlePress = (imgUrl, locationName, spotName) => {
+  const handlePress = (id_location, imgUrl, locationName, spotName) => {
     navigation.navigate("LocationDetailScreen", {
+      idLocation: id_location,
       imageUrl: imgUrl,
       locationName,
       spotName,
@@ -46,13 +74,17 @@ const LocationList = ({ data }): JSX.Element => {
 
   const renderLocationCard = useCallback(
     ({ item, index }): JSX.Element => (
-      <View mb={6}>
+      <View mb={6} key={item.id_location}>
         <MemoizeListItem
-          key={item.id_location}
           item={item}
           width={cardWidth[match]}
           handlePress={() =>
-            handlePress(item.image, item.name_location, item.spot_name)
+            handlePress(
+              item.id_location,
+              item.image,
+              item.name_location,
+              item.spot_name
+            )
           }
         />
       </View>
@@ -63,35 +95,12 @@ const LocationList = ({ data }): JSX.Element => {
 
   return (
     <FlatList
-      keyExtractor={(item) => item.id_location}
+      keyExtractor={getKey}
       // style={styles.flatList}
       data={data}
       renderItem={renderLocationCard}
       showsVerticalScrollIndicator={false}
-      ListHeaderComponent={() => (
-        <Flex>
-          <Text
-            flexWrap="wrap"
-            noOfLines={2}
-            fontSize="lg-1"
-            fontWeight="semibold"
-            lineHeight={30}
-            pt={4}
-          >
-            Hi, Explore and find
-          </Text>
-          <Text
-            flexWrap="wrap"
-            noOfLines={2}
-            fontSize="lg-1"
-            fontWeight="semibold"
-            lineHeight={30}
-            mb={6}
-          >
-            your best spot to learn
-          </Text>
-        </Flex>
-      )}
+      ListHeaderComponent={HeaderComponent}
     />
   );
 };

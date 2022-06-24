@@ -1,11 +1,36 @@
 import MainContainer from "components/containers/MainContainer";
 import MySeatList from "components/list/MySeatList";
-import State from "components/State";
-import seats from "_mocks_/seats";
-// import Empty from "@Illus/empty.svg";
-import Empty from "@Illus/mySeat.svg";
+
+import useGetQuery from "hooks/useGetQuery";
+import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
+import StateScreen from "screens/StateScreen";
+import Illus from "@Illus/seat.svg";
+import { useNavigation } from "@react-navigation/native";
 
 const MySeat = () => {
+  const navigation = useNavigation();
+  const { data, isFetching } = useGetQuery(
+    "all-seat",
+    "/book/filtered?status=pending&page=0"
+  );
+
+  const handlePress = () => {
+    navigation.navigate("HomeScreen");
+  };
+
+  if (isFetching) return <ScreenSpinner />;
+
+  if (!Boolean(data.length))
+    return (
+      <StateScreen
+        title="Seat is still empty"
+        subTitle="Find your best spot to learn at Lounge UPH Medan Campus"
+        btnText="Find Now"
+        Illus={Illus}
+        handlePress={handlePress}
+      />
+    );
+  console.log("data", data);
   return (
     <MainContainer px={4}>
       {/* <State
@@ -14,7 +39,7 @@ const MySeat = () => {
         Illus={Empty}
         btnText="Login"
       /> */}
-      <MySeatList data={seats} />
+      <MySeatList data={data} />
     </MainContainer>
   );
 };

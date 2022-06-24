@@ -1,8 +1,9 @@
-import { Button, Heading, Pressable, Text, View, VStack } from 'native-base';
+import { Button, Heading, Pressable, Text, View, VStack } from "native-base";
 
-const DateButton = ({ date, dayOfWeeks, handlePress, active }) => {
+const DateButton = ({ date, dayOfWeeks, handlePress, active, disabled }) => {
   return (
     <Pressable
+      disabled={disabled}
       onPress={handlePress}
       flex={1}
       alignItems="center"
@@ -10,19 +11,25 @@ const DateButton = ({ date, dayOfWeeks, handlePress, active }) => {
       borderRadius={0}
       borderWidth="1px"
       borderColor="primary.100"
-      backgroundColor={active ? 'primary.500' : 'shade.BG'}>
+      _disabled={{
+        backgroundColor: "gray.300",
+      }}
+      backgroundColor={active ? "primary.500" : "shade.BG"}
+    >
       <VStack alignItems="center" space={1}>
         <Text
-          color={active ? 'primary.200' : 'primary.300'}
+          color={active ? "primary.200" : "primary.300"}
           fontSize="sm-4"
           fontWeight="medium"
-          lineHeight="12.5px">
+          lineHeight="12.5px"
+        >
           {date}
         </Text>
         <Heading
           fontSize="md-2"
           fontWeight="semibold"
-          color={active ? 'primary.50' : 'primary.500'}>
+          color={disabled ? "gray.600" : active ? "primary.50" : "primary.500"}
+        >
           {dayOfWeeks}
         </Heading>
       </VStack>

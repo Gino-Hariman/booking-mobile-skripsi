@@ -1,6 +1,6 @@
 const checkStatusStyle = (title: string) => {
   switch (title) {
-    case "processing":
+    case "pending":
       return "warning";
     case "approve":
       return "success";

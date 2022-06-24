@@ -7,9 +7,10 @@ type Props = {
   btnText: string;
   subTitle: string;
   Illus: React.ReactType;
+  handlePress: () => void;
 };
 
-const State = ({ title, subTitle, btnText, Illus }: Props) => {
+const State = ({ title, subTitle, btnText, Illus, handlePress }: Props) => {
   return (
     <View flex={0.8} alignItems="center" justifyContent="center" px={16}>
       <VStack space={6}>
@@ -37,7 +38,7 @@ const State = ({ title, subTitle, btnText, Illus }: Props) => {
         )}
 
         <Container alignSelf="center">
-          <Button>{btnText}</Button>
+          <Button onPress={handlePress}>{btnText}</Button>
         </Container>
       </VStack>
     </View>

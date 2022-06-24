@@ -1,21 +1,25 @@
 import SeatCard from "components/cards/SeatCard";
-import { Divider, FlatList, Text } from "native-base";
+import { Divider, FlatList } from "native-base";
 
 import { ListItem } from "../components";
 
+const getKey = (item) => item.order_id;
+
+const IteratorComp = () => <Divider bg="shade.BD" />;
+
+const renderSeatCard = ({ item }) => (
+  <ListItem>
+    <SeatCard status={item.order_status} detail={item} />
+  </ListItem>
+);
 const MySeatList = ({ data }) => {
-  const renderSeatCard = ({ item }) => (
-    <ListItem>
-      <SeatCard status={item.order_status} detail={item} />
-    </ListItem>
-  );
   return (
     <FlatList
       overScrollMode="never"
-      keyExtractor={(item) => item.id}
+      keyExtractor={getKey}
       data={data}
       renderItem={renderSeatCard}
-      ItemSeparatorComponent={() => <Divider bg="shade.BD" />}
+      ItemSeparatorComponent={IteratorComp}
       showsVerticalScrollIndicator={false}
     />
   );

@@ -1,7 +1,9 @@
-import { Box, Pressable, Text, VStack } from 'native-base';
-import Calendar from '@Icons/Fill/Calendar.svg';
-import { useState } from 'react';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { Box, Pressable, Text, VStack } from "native-base";
+import Calendar from "@Icons/Fill/Calendar.svg";
+import { useState } from "react";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { dateMonthFormat, getTimeToBackendFormat } from "utils/dateTimeFormat";
+import dayjs from "dayjs";
 
 type Props = {
   setDate: React.Dispatch<React.SetStateAction<Date>>;
@@ -19,7 +21,7 @@ const DateIconButton = ({ setDate }: Props) => {
   };
 
   const handleConfirm = (date: Date) => {
-    setDate(date);
+    setDate(dayjs(date).format(getTimeToBackendFormat));
     hideDatePicker();
   };
 
@@ -39,10 +41,16 @@ const DateIconButton = ({ setDate }: Props) => {
             borderColor="primary.100"
             borderRadius={0}
             bg="shade.BG"
-            p={3}>
+            p={3}
+          >
             <VStack justifyContent="center" alignItems="center" space={1}>
               <Calendar />
-              <Text fontSize="sm-4" fontWeight="medium" lineHeight="12.5px" color="primary.500">
+              <Text
+                fontSize="sm-4"
+                fontWeight="medium"
+                lineHeight="12.5px"
+                color="primary.500"
+              >
                 March
               </Text>
             </VStack>
