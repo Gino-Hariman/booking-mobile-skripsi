@@ -14,12 +14,12 @@ const SelectDateSection = ({ date, setDate, refetch }) => {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    setActive(date);
+    setActive(dayjs(date).format(getTimeToBackendFormat));
   }, [date]);
 
   const onSelectDate = (data: string) => {
     setDate(data);
-    setActive(data);
+    setActive(dayjs(date).format(getTimeToBackendFormat));
     refetch();
   };
   return (
@@ -36,13 +36,11 @@ const SelectDateSection = ({ date, setDate, refetch }) => {
               key={idx}
               active={
                 active === btnDate.format(getTimeToBackendFormat) ||
-                btnDate.format(getTimeToBackendFormat) === date
+                btnDate === date
               }
               date={btnDate.format(dateMonthFormat)}
               dayOfWeeks={dayOfWeeks}
-              handlePress={() =>
-                onSelectDate(btnDate.format(getTimeToBackendFormat))
-              }
+              handlePress={() => onSelectDate(btnDate)}
             />
           );
         })}

@@ -2,12 +2,14 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
 import LocationFooter from "components/navigation/footers/DetailFooter";
 import { useAuth } from "context/AuthContext";
+import dayjs from "dayjs";
 import toast from "helpers/toast";
 import useGetQuery from "hooks/useGetQuery";
 import usePostQuery from "hooks/usePostQuery";
 import { Box, Divider, Spinner, Text, View } from "native-base";
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
+import { getTimeToBackendFormat } from "utils/dateTimeFormat";
 import times from "_mocks_/times";
 import ChooseTime from "./components/ChooseTime";
 import ImageDetail from "./components/ImageDetail";
@@ -17,32 +19,27 @@ const LocationDetail = () => {
   const { idLocation, imageUrl, locationName, spotName } = useRoute().params;
   const navigation = useNavigation();
   const { isLoginned } = useAuth();
-  const [date, setDate] = useState(undefined);
+  const [date, setDate] = useState();
   const [time, setTime] = useState();
+
   const {
     data: timeOptions,
     isFetching: timeOptionFetching,
+    status,
     refetch,
   } = useGetQuery(
-    "time-options",
-    `/location/time?id_location=${idLocation}&date=${date}`,
-    { enabled: Boolean(date) && Boolean(idLocation) }
+    ["booking", "time", "list", date, idLocation],
+    `/location/time?id_location=${idLocation}&date=${dayjs(date).format(
+      getTimeToBackendFormat
+    )}`,
+    { enabled: dayjs(date).format(getTimeToBackendFormat) !== undefined }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [date]);
 
   const mutation = usePostQuery("/book");
   const handleSubmit = () => {
-    // mutation.mutate(data, {
-    //   onSuccess: (res) => console.log('res', res),
-    //   onError: (err) => console.log('err', err),
-    // });
-
     const data = {
       id_location: idLocation,
-      date: date,
+      date: dayjs(date).format(getTimeToBackendFormat),
       id_time: time,
     };
     mutation.mutate(data, {
@@ -82,7 +79,7 @@ const LocationDetail = () => {
     });
   };
 
-  console.log("date,time", date, time);
+  // console.log("date,time", timeOptions);
 
   return (
     <View flex={1}>
@@ -94,7 +91,7 @@ const LocationDetail = () => {
         />
         <Box px={4}>
           <SelectDateSection date={date} setDate={setDate} refetch={refetch} />
-          {Boolean(date) && (
+          {timeOptions && (
             <>
               <Divider thickness={2} bg="shade.BD" />
               {timeOptionFetching ? (
@@ -106,7 +103,7 @@ const LocationDetail = () => {
           )}
         </Box>
       </ScrollView>
-      {isLoginned && <LocationFooter handleSubmit={handleSubmit} />}
+      {isLoginned && <LocationFooter date={date} handleSubmit={handleSubmit} />}
     </View>
   );
 };

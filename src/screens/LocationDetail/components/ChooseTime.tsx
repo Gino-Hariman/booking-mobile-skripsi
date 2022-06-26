@@ -1,5 +1,5 @@
 import TimeCheckbox from "components/checkboxs/TimeCheckbox";
-import { Box, Stack, Text, View, VStack } from "native-base";
+import { Box, Text, VStack } from "native-base";
 import { useState } from "react";
 import TimeListType from "types/times/TimeList";
 
@@ -30,7 +30,7 @@ const ChooseTime = ({ data, time, setTime }: Props) => {
       >
         Choose time
       </Text>
-      <VStack space={2}>{data?.map(renderTimeCheckbox)}</VStack>
+      <VStack space={2}>{data.map(renderTimeCheckbox)}</VStack>
     </Box>
   );
 };

@@ -7,12 +7,18 @@ import changeFieldText from "helpers/changeFieldText";
 
 const SeatCard = ({ status, detail }) => {
   return (
-    <View flexDirection="row" justifyContent="space-between">
-      <VStack>
+    <Flex flexDirection="row" w="full" flex="1" justifyContent="space-between">
+      <VStack flex="1">
         <Text color="gray.600" fontSize="md-1" mb={3}>
           {`ID: ${detail.order_id}`}
         </Text>
-        <Text color="gray.800" fontWeight="semibold" fontSize="md-3" mb={2}>
+        <Text
+          color="gray.800"
+          isTruncated
+          fontWeight="semibold"
+          fontSize="md-3"
+          mb={2}
+        >
           {`${detail.name_location} - ${detail.spot_name}`}
         </Text>
         <HStack space={4}>
@@ -32,13 +38,13 @@ const SeatCard = ({ status, detail }) => {
           </Flex>
         </HStack>
       </VStack>
-      <View alignSelf="flex-end">
+      <View alignSelf="flex-end" paddingLeft="1.5">
         <Status
           title={changeFieldText(status)}
           colorScheme={checkStatusStyle(status)}
         />
       </View>
-    </View>
+    </Flex>
   );
 };
 

@@ -23,19 +23,19 @@ const TimeCheckbox = ({ data, checked, setGroupValue }: Props) => {
   };
 
   const handleBorderColor = () => {
-    if (data.isDisabled) return "gray.300";
+    if (data.is_disabled) return "gray.300";
     if (checked) return "primary.500";
     return "shade.BD";
   };
 
   const handleBgColor = () => {
-    if (data.isDisabled) return "shade.BG";
+    if (data.is_disabled) return "shade.BG";
     if (checked) return "primary.50";
     return "shade.FG";
   };
 
   const handleTextColor = () => {
-    if (data.isDisabled) return "gray.300";
+    if (data.is_disabled) return "gray.300";
     if (checked) return "primary.500";
     return "gray.800";
   };
@@ -52,7 +52,7 @@ const TimeCheckbox = ({ data, checked, setGroupValue }: Props) => {
         w="100%"
         isChecked={checked}
         onChange={() => handleChange(data.id_time)}
-        isDisabled={data.isDisabled}
+        isDisabled={data.is_disabled}
         value={data.id_time}
         _text={{ color: handleTextColor() }}
         colorScheme="primary"

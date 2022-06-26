@@ -1,6 +1,8 @@
+import dayjs from "dayjs";
 import { Button, Text, View, VStack } from "native-base";
+import { footerDateTimeFormat } from "utils/dateTimeFormat";
 
-const LocationFooter = ({ handleSubmit }) => {
+const LocationFooter = ({ date, handleSubmit }) => {
   return (
     <View
       w="full"
@@ -17,7 +19,7 @@ const LocationFooter = ({ handleSubmit }) => {
           Booking Date
         </Text>
         <Text fontSize="md-3" fontWeight="semibold" lineHeight="20px">
-          1 March 2022
+          {dayjs(date).format(footerDateTimeFormat)}
         </Text>
       </VStack>
       <Button

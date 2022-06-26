@@ -16,7 +16,7 @@ const MyHistory = () => {
 
   if (isFetching) return <ScreenSpinner />;
 
-  if (!Boolean(data.length))
+  if (!Boolean(data?.length))
     return (
       <StateScreen
         title="Seat is still empty"
