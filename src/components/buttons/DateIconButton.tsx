@@ -4,6 +4,7 @@ import { useState } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { dateMonthFormat, getTimeToBackendFormat } from "utils/dateTimeFormat";
 import dayjs from "dayjs";
+import { Platform } from "react-native";
 
 type Props = {
   setDate: React.Dispatch<React.SetStateAction<Date>>;
@@ -61,7 +62,8 @@ const DateIconButton = ({ setDate }: Props) => {
         minimumDate={new Date(Date.now() + 3600 * 1000 * 24)}
         isVisible={open}
         mode="date"
-        display="inline"
+        maximumDate={undefined}
+        display={Platform.OS === "ios" ? "inline" : "default"}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
