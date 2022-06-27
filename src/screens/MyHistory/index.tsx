@@ -8,7 +8,10 @@ import { useNavigation } from "@react-navigation/native";
 
 const MyHistory = () => {
   const navigation = useNavigation();
-  const { data, isFetching } = useGetQuery(["my-history"], `/book/history`);
+  const { data, isFetching, isRefetching, refetch } = useGetQuery(
+    ["my-history"],
+    `/book/history`
+  );
 
   const handlePress = () => {
     navigation.navigate("HomeScreen");
@@ -29,7 +32,11 @@ const MyHistory = () => {
 
   return (
     <MainContainer px={4}>
-      <MyHistoryList data={data} />
+      <MyHistoryList
+        data={data}
+        refreshing={isRefetching}
+        onRefresh={refetch}
+      />
     </MainContainer>
   );
 };

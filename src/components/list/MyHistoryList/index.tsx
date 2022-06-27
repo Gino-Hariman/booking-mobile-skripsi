@@ -1,9 +1,10 @@
 import SeatCard from "components/cards/SeatCard";
 import { Box, Divider, FlatList, Stack } from "native-base";
+import { RefreshControl } from "react-native";
 import { ListItem } from "../components";
 import Note from "../components/Note";
 
-const MyHistoryList = ({ data }) => {
+const MyHistoryList = ({ data, refreshing, onRefresh }) => {
   const renderSeatCard = ({ item }) => (
     <ListItem key={item.order_id}>
       <Stack space={6}>
@@ -14,6 +15,9 @@ const MyHistoryList = ({ data }) => {
   );
   return (
     <FlatList
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       overScrollMode="never"
       keyExtractor={(item) => item.order_id}
       data={data}
