@@ -5,6 +5,7 @@ import { useAuth } from "context/AuthContext";
 import toast from "helpers/toast";
 import usePostQuery from "hooks/usePostQuery";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "react-query";
 import * as yup from "yup";
 
 const validationSchema = yup
@@ -13,7 +14,8 @@ const validationSchema = yup
   })
   .required();
 
-const VerifyAccount = ({ route }) => {
+const VerifyAccount = ({ navigation, route }) => {
+  const queryClient = useQueryClient();
   const {
     setValue,
     register,
@@ -29,7 +31,7 @@ const VerifyAccount = ({ route }) => {
 
   const { loginToken } = route.params;
 
-  const { saveAuthToken } = useAuth();
+  const { saveAuthToken, checkUserRegister } = useAuth();
 
   const verifyMutation = usePostQuery("/login/verify");
 
@@ -45,7 +47,10 @@ const VerifyAccount = ({ route }) => {
               subTitle: "Successfully Verify the OTP",
             });
 
+            // if (checkUserRegister()) return saveAuthToken(res);
+
             saveAuthToken(res);
+            // return navigation.navigate("StudentDataScreen");
           }
           console.log("res", res);
           if (res.type === "error")
@@ -61,6 +66,9 @@ const VerifyAccount = ({ route }) => {
             title: "Verify OTP",
             subTitle: "Sorry, Something went wrong!!",
           }),
+        onSettled: () => {
+          queryClient.invalidateQueries(["profile", "details"]);
+        },
       }
     );
     // navigation.navigate('StudentDataScreen');

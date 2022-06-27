@@ -11,7 +11,7 @@ import { ProfileParamList } from "types/ProfileParamList";
 const Stack = createStackNavigator<ProfileParamList>();
 
 const ProfileStack = (): JSX.Element => {
-  const { isLoginned } = useAuth();
+  const { isLoginned, checkUserRegister } = useAuth();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -22,8 +22,11 @@ const ProfileStack = (): JSX.Element => {
     >
       {isLoginned ? (
         <>
-          <Stack.Screen name="ProfileScreen" component={Profile} />
-          <Stack.Screen name="StudentDataScreen" component={StudentData} />
+          {checkUserRegister() === true ? (
+            <Stack.Screen name="ProfileScreen" component={Profile} />
+          ) : (
+            <Stack.Screen name="StudentDataScreen" component={StudentData} />
+          )}
         </>
       ) : (
         <>

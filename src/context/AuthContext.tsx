@@ -10,6 +10,7 @@ import React, {
 import * as SecureStore from "expo-secure-store";
 import { ProfileNavigationProps } from "types/NavigationProps";
 import instance from "api/instance";
+import useGetQuery from "hooks/useGetQuery";
 
 interface AuthContextInterface {
   login: (token: string) => void;
@@ -31,6 +32,10 @@ interface Props {
 }
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
+  const { data: user, isFetching } = useGetQuery([
+    "user-detail",
+    `/students/byEmail?email=${SecureStore.getItemAsync("email")}`,
+  ]);
   const navigation = useNavigation<ProfileNavigationProps>();
 
   const [authToken, setAuthToken] = useState<string | null>(null);
@@ -56,6 +61,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const clearAuthToken = useCallback(async () => {
     await SecureStore.deleteItemAsync(authTokenName);
+    await SecureStore.deleteItemAsync("email");
     instance.defaults.headers["Authorization"] = "";
     setAuthToken(null);
   }, []);
@@ -82,14 +88,20 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     loadAuthToken();
   }, []);
 
+  const checkUserRegister = () => {
+    return Boolean(user);
+  };
+
   const value: AuthContextInterface = useMemo(
     () => ({
+      loading: isFetching,
       login,
       authToken,
       saveAuthToken,
       clearAuthToken,
       logout,
       isLoginned: Boolean(authToken),
+      checkUserRegister,
     }),
     [login, authToken, saveAuthToken, clearAuthToken, logout]
   );

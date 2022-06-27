@@ -4,14 +4,19 @@ import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
 import ScrollPage from "components/ScrollPage";
 import { useAuth } from "context/AuthContext";
 import useGetQuery from "hooks/useGetQuery";
+import { useEffect } from "react";
 
 const Profile = () => {
   const { logout } = useAuth();
-  const { data, isFetching } = useGetQuery(
+  const { data, isFetching, refetch } = useGetQuery(
     ["profile", "details"],
     "/students/byNIM",
     { onError: (err) => console.log("er123", err) }
   );
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isFetching) return <ScreenSpinner />;
   console.log("data", data);
