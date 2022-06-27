@@ -4,6 +4,7 @@ import { Box, FlatList, Flex, Text, View } from "native-base";
 import { useCallback } from "react";
 import {
   Pressable,
+  RefreshControl,
   StyleSheet,
   TouchableNativeFeedback,
   TouchableOpacity,
@@ -59,7 +60,7 @@ const HeaderComponent = () => (
 
 const getKey = (item) => `s-${item.id_location}`;
 
-const LocationList = ({ data }): JSX.Element => {
+const LocationList = ({ data, refreshing, onRefresh }): JSX.Element => {
   const { match } = useMatchBreakPoint({ sizes: ["md", "lg", "xl"] });
   const navigation = useNavigation();
 
@@ -95,6 +96,9 @@ const LocationList = ({ data }): JSX.Element => {
 
   return (
     <FlatList
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       keyExtractor={getKey}
       // style={styles.flatList}
       data={data}

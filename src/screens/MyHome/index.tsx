@@ -14,14 +14,17 @@ import useGetQuery from "hooks/useGetQuery";
 import ScreenSpinner from "components/feedbacks/loader/ScreenSpinner";
 
 const MyHome = () => {
-  const { data, isFetching } = useGetQuery(["all-location"], "/location");
+  const { data, isFetching, refetch, isRefetching } = useGetQuery(
+    ["all-location"],
+    "/location"
+  );
 
   if (isFetching) return <ScreenSpinner />;
   return (
     // <LocationDetail />
     // <State Illus={Empty} title="asdfafsaf " btnText="asflsao" />
     <MainContainer px={4}>
-      <LocationList data={data} />
+      <LocationList data={data} refreshing={isRefetching} onRefresh={refetch} />
     </MainContainer>
   );
 };
