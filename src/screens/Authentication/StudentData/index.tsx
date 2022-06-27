@@ -7,6 +7,7 @@ import * as SecureStore from "expo-secure-store";
 import toast from "helpers/toast";
 import { useAuth } from "context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "react-query";
 
 const validationSchema = yup
   .object({
