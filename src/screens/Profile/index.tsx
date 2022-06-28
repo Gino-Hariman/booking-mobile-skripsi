@@ -19,7 +19,6 @@ const Profile = () => {
   }, []);
 
   if (isFetching) return <ScreenSpinner />;
-  console.log("data", data);
   return (
     <ScrollPage>
       {Boolean(data.length) ? (

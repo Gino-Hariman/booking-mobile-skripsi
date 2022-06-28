@@ -30,7 +30,6 @@ const MySeat = () => {
         handlePress={handlePress}
       />
     );
-  console.log("data", data);
   return (
     <MainContainer px={4}>
       {/* <State

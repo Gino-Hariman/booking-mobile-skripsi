@@ -28,7 +28,6 @@ const SelectDateSection = ({ date, setDate, refetch }) => {
         {getDateByIndex().map((i, idx) => {
           const btnDate = dayjs(i);
           const dayOfWeeks = dayjs(i).format(dayOfWeeksFormat);
-          console.log("dayOfWeeks", dayOfWeeks);
 
           return (
             <DateButton

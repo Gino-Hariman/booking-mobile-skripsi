@@ -15,7 +15,6 @@ const TimeCheckbox = ({ data, checked, setGroupValue }: Props) => {
   // }, [checked])
 
   const handleChange = (value: TimeListType) => {
-    console.log("va", value);
     // setChecked((prev) => !prev);
     // setGroupValue((prev) => [...prev, value]);
     if (checked) return setGroupValue(undefined);
