@@ -48,7 +48,6 @@ const RegisterProfile = () => {
       { ...data, email: SecureStore.getItemAsync("email") },
       {
         onSuccess: (res) => {
-          console.log("res", res);
           if (res.type === "success") {
             toast({
               type: "success",
@@ -60,7 +59,6 @@ const RegisterProfile = () => {
           }
         },
         onError: (err) => {
-          console.log("err", err);
           toast({
             type: "error",
             title: "Register Profile",
@@ -70,7 +68,6 @@ const RegisterProfile = () => {
       }
     );
   };
-  console.log("getvalues()", getValues());
   return (
     <MainContainer px={4}>
       <FormControl mb={5}>

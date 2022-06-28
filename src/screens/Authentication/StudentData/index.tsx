@@ -42,7 +42,6 @@ const StudentData = () => {
   const registerUserMutation = usePostQuery("/students");
 
   const onSubmit = (data) => {
-    console.log("data form", data);
     registerUserMutation.mutate(
       { ...data, email: SecureStore.getItemAsync("email") },
       {

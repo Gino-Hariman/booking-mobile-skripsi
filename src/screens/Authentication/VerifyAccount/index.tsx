@@ -52,7 +52,6 @@ const VerifyAccount = ({ navigation, route }) => {
             saveAuthToken(res);
             // return navigation.navigate("StudentDataScreen");
           }
-          console.log("res", res);
           if (res.type === "error")
             return toast({
               type: "error",
