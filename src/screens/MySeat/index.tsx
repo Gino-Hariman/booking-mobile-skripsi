@@ -32,12 +32,6 @@ const MySeat = () => {
     );
   return (
     <MainContainer px={4}>
-      {/* <State
-        title="Seat is still empty Let’s start by Loggin in first"
-        // subTitle="find your best spot to study at uph medan campus lounge"
-        Illus={Empty}
-        btnText="Login"
-      /> */}
       <MySeatList data={data} refreshing={isRefetching} onRefresh={refetch} />
     </MainContainer>
   );

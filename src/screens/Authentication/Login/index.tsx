@@ -9,7 +9,11 @@ import * as yup from "yup";
 
 const validationSchema = yup
   .object({
-    email: yup.string().email("Invalid Email").required("Email Required"),
+    email: yup
+      .string()
+      .email("Invalid Email")
+      .matches("(@student.uph.edu|@uph.edu)", "only can @student.uph.edu")
+      .required("Email Required"),
   })
   .required();
 
